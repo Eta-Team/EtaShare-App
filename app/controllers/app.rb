@@ -29,7 +29,7 @@ module EtaShare
             # GET api/v1/accounts/[id]
             routing.get String do |id|
               response.status = 200
-            Account.find(id).to_json
+              Account.find(id).to_json
             rescue StandardError
               routing.halt 404, { message: 'Account not found' }.to_json
             end
@@ -44,7 +44,7 @@ module EtaShare
             # POST api/v1/accounts
             routing.post do
               new_data = JSON.parse(routing.body.read)
-              new_doc =Account.new(new_data)
+              new_doc = Account.new(new_data)
 
               if new_doc.save
                 response.status = 201

@@ -67,7 +67,7 @@ namespace :db do
       return
     end
 
-    db_filename = "app/db/store/#{Credence::Api.environment}.db"
+    db_filename = "app/db/store/#{EtaShare::Api.environment}.db"
     FileUtils.rm(db_filename)
     puts "Deleted #{db_filename}"
   end

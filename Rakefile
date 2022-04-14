@@ -57,7 +57,7 @@ namespace :db do
 
   desc 'Destroy data in database; maintain tables'
   task delete: :load do
-    EtaShare::Account.dataset.destroy
+    EtaShare::Api.DB.dataset.destroy
   end
 
   desc 'Delete dev or test database file'
@@ -67,7 +67,7 @@ namespace :db do
       return
     end
 
-    db_filename = "app/db/store/#{Credence::Api.environment}.db"
+    db_filename = "app/db/store/#{EtaShare::Api.environment}.db"
     FileUtils.rm(db_filename)
     puts "Deleted #{db_filename}"
   end

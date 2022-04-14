@@ -32,7 +32,6 @@ group :test do
   gem 'rack-test'
 end
 
-
 # Debugging
 gem 'pry'
 gem 'rerun'

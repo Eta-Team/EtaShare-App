@@ -30,7 +30,7 @@ describe 'Test Links' do
 
     result = JSON.parse last_response.body
     _(result['data']['attributes']['id']).must_equal id
-    _(result['data']['attributes']['name']).must_equal existing_link['name']
+    _(result['data']['attributes']['title']).must_equal existing_link['title']
   end
 
   it 'SAD: should return error if unknown link requested' do

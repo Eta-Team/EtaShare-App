@@ -9,7 +9,7 @@ Sequel.migration do
       foreign_key   :link_id, table: :links
 
       String        :name, null: false
-      String        :description, null: false, default: ''
+      String        :description_secure, null: false, default: ''
 
       DateTime      :created_at
       DateTime      :updated_at

@@ -10,6 +10,15 @@ module EtaShare
 
     plugin :timestamps
 
+    # Secure getters and setters
+    def description
+      SecureDB.decrypt(description_secure)
+    end
+
+    def description=(plaintext)
+      self.description_secure = SecureDB.encrypt(plaintext)
+    end
+
     # rubocop:disable Metrics/MethodLength
     def to_json(options = {})
       JSON(

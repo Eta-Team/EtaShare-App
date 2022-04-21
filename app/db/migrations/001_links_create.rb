@@ -8,9 +8,9 @@ Sequel.migration do
       primary_key :id
 
       String      :title, unique: true, null: false
-      String      :description, unique: true, null: false
+      String      :description_secure, unique: true, null: false
       Integer     :is_clicked, null: false
-      Integer     :valid_period
+      Integer     :valid_period_secure
 
       DateTime    :created_at
       DateTime    :updated_at

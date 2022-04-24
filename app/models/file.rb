@@ -9,6 +9,8 @@ module EtaShare
     many_to_one :link
 
     plugin :timestamps
+    plugin :whitelist_security
+    set_allowed_columns :name, :description
 
     # Secure getters and setters
     def description

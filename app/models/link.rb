@@ -10,6 +10,8 @@ module EtaShare
     plugin :association_dependencies, files: :destroy
 
     plugin :timestamps
+    plugin :whitelist_security
+    set_allowed_columns :title, :is_clicked, :description, :valid_period
 
     # Secure getters and setters
     def description

@@ -36,6 +36,5 @@ describe 'Test File Handling' do
     stored_file = app.DB[:files].first
 
     _(stored_file[:description_secure]).wont_equal new_file.description
-    _(stored_file[:content_secure]).wont_equal new_file.content
   end
 end

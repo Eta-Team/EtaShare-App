@@ -61,7 +61,7 @@ describe 'Test File Handling' do
       _(last_response.header['Location'].size).must_be :>, 0
 
       created = JSON.parse(last_response.body)['data']['data']['attributes']
-      file = EtaShare::Document.first
+      file = EtaShare::File.first
 
       _(created['id']).must_equal file.id
       _(created['name']).must_equal @file_data['name']

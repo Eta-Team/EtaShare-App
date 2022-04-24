@@ -8,6 +8,8 @@ module EtaShare
   class File < Sequel::Model
     many_to_one :link
 
+    plugin :uuid, field: :id
+
     plugin :timestamps
     plugin :whitelist_security
     set_allowed_columns :name, :description

@@ -24,6 +24,7 @@ class SecureDB
     return nil unless plaintext
 
     simple_box = RbNaCl::SimpleBox.from_secret_key(@key)
+    plaintext.to_s if plaintext.is_a? Integer
     ciphertext = simple_box.encrypt(plaintext)
     Base64.strict_encode64(ciphertext)
   end

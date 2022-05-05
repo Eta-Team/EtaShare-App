@@ -2,10 +2,11 @@
 
 source 'https://rubygems.org'
 
-# Web API
+# Web
 gem 'json'
 gem 'puma', '~>5.6'
 gem 'roda', '~>3.54'
+gem 'slim'
 
 # Configuration
 gem 'figaro', '~>1'

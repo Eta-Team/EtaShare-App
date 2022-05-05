@@ -5,7 +5,7 @@
 require_relative '../require_app'
 require_app
 
-def app = EtaShare::Api
+def app = EtaShare::App
 
 unless app.environment == :production
   require 'rack/test'

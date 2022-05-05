@@ -3,4 +3,4 @@
 require './require_app'
 require_app
 
-run EtaShare::Api.freeze.app
+run EtaShare::App.freeze.app

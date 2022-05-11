@@ -1,15 +1,8 @@
-# EtaShare API
+# EtaShare App
 
-API to share account information between peers
+Web Application for EtaShare system that allows individual to share links that will only render on our website. Currently we only accept PDF
+files.
 
-## Routes
+You can refer to the Web API that it uses: `https://github.com/Eta-Team/EtaShare`
 
-All routes return JSON
-
-- GET `/`: Root route shows if Web API is running
-- GET `api/v1/links/[link_id]/files/[file_id]`: Get a file
-- GET `api/v1/links/[link_id]/files`: Get list of files for link
-- POST `api/v1/links/[ID]/files/`: Upload file for a link
-- GET `api/v1/links/[ID]`: Get information about a link
-- GET `api/v1/links/`: Get lsit of all links
-- POST `api/v1/links/`: Create new link
+The application expects the API application to also be running (see `config/app.yml` for specifying its URL)

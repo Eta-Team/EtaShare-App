@@ -3,7 +3,7 @@ section.header
     a href="/"  EtaShare
   .links
     - unless current_account
-      a href="register.html"  Register
+      a href="/auth/register"  Register
     - if @current_account
       a href='/auth/logout' Logout
       a href='/account/#{@current_account['username']}' Account
@@ -25,7 +25,7 @@ section.main
         .information
           p.big-para
             b SIGN IN
-          input#email placeholder="Email" required="" type="text" name='username'/
+          input#email placeholder="Username" required="" type="text" name='username'/
           input#password minlength="8" placeholder="Password" required="" type="password" name='password'/
           button.button-1 Submit
 

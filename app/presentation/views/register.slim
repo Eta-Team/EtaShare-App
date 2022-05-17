@@ -1,0 +1,22 @@
+section.header
+  .logo
+    a href="/"  EtaShare
+  .links
+    a href="about.html"  About
+section.main
+    .text-bg
+      p
+        |  Welcome! Join the Family and Start Sharing Documents. Data have never been that securely saved in
+        |  2022.
+    .form
+      form.form-data method='post' action='/auth/register' id='form-login'
+        img alt="" src="im.png" width="20%" /
+        h1 Welcome to EtaShare
+        .information
+          p.big-para
+            b REGISTER
+          input#email placeholder="Username" required="" type="text" name='username'/
+          input#email placeholder="Email" required="" type="email" name='email'/
+          input#password minlength="8" placeholder="Password" required="" type="password" name='password'/
+          button.button-1 Register
+

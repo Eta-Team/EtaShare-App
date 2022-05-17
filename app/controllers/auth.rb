@@ -7,7 +7,7 @@ module EtaShare
   # Web controller for EtaShare
   class App < Roda
     route('auth') do |routing|
-      @login_route = '/auth/login'
+      @login_route = '/'
       routing.is 'login' do
         # GET /auth/login
         routing.get do
@@ -27,7 +27,7 @@ module EtaShare
         rescue StandardError
           flash.now[:error] = 'Username and password did not match our records'
           response.status = 400
-          view :login
+          routing.redirect @login_route
         end
       end
 

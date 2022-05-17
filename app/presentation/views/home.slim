@@ -1,9 +1,31 @@
-h1 Welcome to Etashare
-p This site allows you to share your account access links securely.
-  
-p
-  i Please avoid sharing production configuration at this point.
+section.header
+  .logo
+    a href="/"  EtaShare
+  .links
+    - unless current_account
+      a href="/auth/register"  Register
+    - if @current_account
+      a href='/auth/logout' Logout
+      a href='/account/#{@current_account['username']}' Account
+    a href="about.html"  About
+section.main
+  - if @current_account
+    .form
+      p.hero 
+        | You're signed in!🥳
+  - else
+    .text-bg
+      p
+        | Welcome to EtaShare! Where sharing your documents is safe and your data is securely encrypted and
+        |  saved. Sign in to Start Sharing!
+    .form
+      form.form-data method='post' action='/auth/login' id='form-login'
+        img alt="" src="im.png" width="20%" /
+        h1 Welcome to EtaShare
+        .information
+          p.big-para
+            b SIGN IN
+          input#email placeholder="Username" required="" type="text" name='username'/
+          input#password minlength="8" placeholder="Password" required="" type="password" name='password'/
+          button.button-1 Login
 
-- unless current_account
-  p 
-    a href='/auth/login' login to start!

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rake/testtask'
+require './require_app'
 
 task :print_env do
   puts "Environment: #{ENV.fetch('RACK_ENV') || 'development'}"

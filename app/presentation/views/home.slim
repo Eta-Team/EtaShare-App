@@ -2,14 +2,14 @@ section.header
   .logo
     a href="/"  EtaShare
   .links
-    - unless current_account
+    - unless @current_account.logged_in?
       a href="/auth/register"  Register
-    - if @current_account
+    - if @current_account.logged_in?
       a href='/auth/logout' Logout
-      a href='/account/#{@current_account['username']}' Account
+      a href='/account/#{@current_account.username}' Account
     a href="about.html"  About
 section.main
-  - if @current_account
+  - if @current_account.logged_in?
     .form
       p.hero 
         | You're signed in!🥳

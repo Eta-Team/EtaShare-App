@@ -15,9 +15,9 @@ section.main
           p.big-para
             b REGISTER
           | Username: 
-          input#email value="#{new_account.username}" disabled name='username' /
+          input#email value="#{new_account['username']}" disabled="" name='username' /
           | Email:
-          input#email value="#{new_account.email}" disabled="" type="email" name='email'/
+          input#email value="#{new_account['email']}" disabled="" type="email" name='email'/
           input#email placeholder="Password" reqired="" type="password" name='password'/
           input#email placeholder="Re-enter Password" required="" type="password" name='password_confirm'/
           button.button-1 Register

@@ -8,11 +8,11 @@ module EtaShare
   class App < Roda
     route('auth') do |routing|
       routing.public
-      @login_route = '/auth/login'
+      @login_route = '/'
       routing.is 'login' do
         # GET /auth/login
         routing.get do
-          view :login
+          view :home
         end
 
         # POST /auth/login
@@ -34,7 +34,7 @@ module EtaShare
         rescue AuthenticateAccount::UnauthorizedError
           flash.now[:error] = 'Username and password did not match our records'
           response.status = 401
-          view :login
+          view :home
         rescue AuthenticateAccount::ApiServerError => e
           App.logger.warn "API server error: #{e.inspect}\n#{e.backtrace}"
           flash[:error] = 'Our servers are not responding -- please try later'

@@ -13,7 +13,7 @@ module EtaShare
           if @current_account && @current_account.username == username
             view :account, locals: { current_account: @current_account }
           else
-            routing.redirect '/auth/login'
+            routing.redirect '/'
           end
         end
 
@@ -30,7 +30,7 @@ module EtaShare
             password: routing.params['password']
           )
           flash[:notice] = 'Account created! Please login'
-          routing.redirect '/auth/login'
+          routing.redirect '/'
         rescue CreateAccount::InvalidAccount => e
           flash[:error] = e.message
           routing.redirect '/auth/register'

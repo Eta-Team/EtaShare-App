@@ -1,0 +1,16 @@
+div class="row" style="vertical-align: bottom;"
+  div class="col-xs-9"
+    h3 All Links
+  div class="col-xs-3"
+table class="table"
+  thead
+    tr
+      th Link Name
+      th Link Valid Period
+  tbody
+    - links.all.each do |link|
+      tr
+        td 
+          a href="/account/links/#{link.id}" #{link.name}
+          td 
+            a href="#{link.valid_period}" #{link.valid_period}

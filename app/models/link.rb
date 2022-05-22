@@ -3,12 +3,13 @@
 module EtaShare
   # Behaviors of the currently logged in account
   class Link
-    attr_reader :id, :name, :repo_url
+    attr_reader :id, :description, :is_clicked, :valid_period
 
     def initialize(link_info)
       @id = link_info['attributes']['id']
-      @name = link_info['attributes']['name']
-      @repo_url = link_info['attributes']['repo_url']
+      @description = link_info['attributes']['description']
+      @is_clicked = link_info['attributes']['is_clicked']
+      @valid_period = link_info['attributes']['valid_period']
     end
   end
 end

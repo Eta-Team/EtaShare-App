@@ -1,0 +1,24 @@
+section.header
+  .logo
+    a href="/"  EtaShare
+  .links
+    a href="about.html"  About
+section.main
+    .text-bg
+      p
+        |  Email is verified! Last step fill in a password to start.
+    .form
+      form.form-data method='post' action="/account/#{registration_token}" id='user-form'
+        img alt="" src="im.png" width="20%" /
+        h1 Welcome to EtaShare
+        .information
+          p.big-para
+            b REGISTER
+          | Username: 
+          input#email value="#{new_account.username}" disabled name='username' /
+          | Email:
+          input#email value="#{new_account.email}" disabled="" type="email" name='email'/
+          input#email placeholder="Password" reqired="" type="password" name='password'/
+          input#email placeholder="Re-enter Password" required="" type="password" name='password_confirm'/
+          button.button-1 Register
+

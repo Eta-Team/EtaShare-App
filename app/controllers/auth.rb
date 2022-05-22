@@ -6,6 +6,7 @@ require_relative './app'
 module EtaShare
   # Web controller for Credence API
   class App < Roda
+    plugin :public, root: 'app/presentation/public'
     route('auth') do |routing|
       @login_route = '/auth/login'
       routing.is 'login' do

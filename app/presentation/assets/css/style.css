@@ -4,21 +4,18 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .header a {
   color: rgb(255, 106, 149);
   text-decoration: none;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .header a:hover {
   color: white;
-}
-
-#page {
-  display: flex;
-  flex-direction: column;
 }
 
 .header,
@@ -37,7 +34,7 @@ body {
 .footer {
   background-color: #131427;
   padding: 1%;
-  flex: 1;
+  /* flex: 1; */
 }
 
 .footer {
@@ -49,21 +46,13 @@ body {
 }
 
 .main {
-  flex: 2;
+  flex: 1;
 }
 
-.header {
-  height: 7vh;
-}
-.footer {
-  height: 6vh;
-}
 .text-bg,
 .form,
 .form-data,
 .account_info {
-  flex: 1;
-  height: 87vh;
   display: flex;
   flex-direction: column;
 }
@@ -81,7 +70,7 @@ body {
 .form .hero {
   align-self: center;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .text-bg {
@@ -180,7 +169,6 @@ body {
 }
 
 .main-data {
-  height: 85vh;
   flex: 1;
   display: flex;
   flex-direction: column;

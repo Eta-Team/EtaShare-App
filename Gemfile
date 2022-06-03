@@ -41,3 +41,6 @@ group :development, :test do
   gem 'rack-test'
   gem 'rerun'
 end
+
+#Validation
+gem 'dry-validation'

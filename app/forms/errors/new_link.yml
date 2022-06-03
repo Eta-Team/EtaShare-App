@@ -1,0 +1,4 @@
+en:
+  errors:
+    description: 'Link must have a description'
+    valid_period: 'Validity period must be a number'

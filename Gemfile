@@ -23,6 +23,8 @@ gem 'rbnacl' # assumes libsodium package already installed
 
 # Debugging
 gem 'pry'
+gem 'rack-test'
+
 
 # Development
 group :development do
@@ -38,6 +40,8 @@ group :test do
 end
 
 group :development, :test do
-  gem 'rack-test'
   gem 'rerun'
 end
+
+# Validation
+gem 'dry-validation'

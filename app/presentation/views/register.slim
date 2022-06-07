@@ -9,6 +9,7 @@ section.main
         |  Welcome! Join the Family and Start Sharing Documents. Data have never been that securely saved in
         |  2022.
     .form
+      == render :flash_bar    
       form.form-data method='post' action='/auth/register' id='form-login'
         img alt="" src="im.png" width="20%" /
         h1 Welcome to EtaShare

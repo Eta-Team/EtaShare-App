@@ -4,7 +4,7 @@ require 'roda'
 require_relative './app'
 
 module EtaShare
-  # Web controller for Credence API
+  # Web controller for EtaShare API
   class App < Roda
     route('auth') do |routing|
       routing.public
@@ -17,20 +17,25 @@ module EtaShare
 
         # POST /auth/login
         routing.post do
-          account_info = AuthenticateAccount.new(App.config).call(
-            username: routing.params['username'],
-            password: routing.params['password']
-          )
+          credentials = Form::LoginCredentials.new.call(routing.params)
+
+          if credentials.failure?
+            flash[:error] = 'Please enter both username and password'
+            routing.redirect @login_route
+          end
+
+          authenticated = AuthenticateAccount.new(App.config)
+                                             .call(**credentials.values)
 
           current_account = Account.new(
-            account_info[:account],
-            account_info[:auth_token]
+            authenticated[:account],
+            authenticated[:auth_token]
           )
 
           CurrentSession.new(session).current_account = current_account
 
           flash[:notice] = "Welcome back #{current_account.username}!"
-          routing.redirect '/'
+          routing.redirect '/links'
         rescue AuthenticateAccount::UnauthorizedError
           flash.now[:error] = 'Username and password did not match our records'
           response.status = 401

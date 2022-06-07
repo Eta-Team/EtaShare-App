@@ -1,0 +1,17 @@
+== assets(:css)
+#myModal1.modal
+  /! Modal content
+  .modal-content
+    .modal-header
+      span.close &times;
+      h2 Add New Accessor
+    .modal-body
+      form role="form" action="/links/#{link.id}/accessors" method='post' id='new-accessor-form'
+        input type='hidden' name='action' value='add'
+        .form-group
+          label for='email_input' Email address:
+          input type='email' name='email' id='email_input' class="form-control" placeholder="Accessor's email"
+          button.button-1.mt type='submit' value='submit' Add
+/ - binding.pry
+    / .modal-footer 
+    /   | djd

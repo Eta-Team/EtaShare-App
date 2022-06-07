@@ -8,6 +8,7 @@ section.main
       p
         |  Email is verified! Last step fill in a password to start.
     .form
+      == render :flash_bar
       form.form-data method='post' action="/account/#{registration_token}" id='user-form'
         img alt="" src="im.png" width="20%" /
         h1 Welcome to EtaShare

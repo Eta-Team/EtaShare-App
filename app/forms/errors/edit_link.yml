@@ -1,0 +1,6 @@
+en:
+  errors:
+    title: "provide title with up to 100 legal characters"
+    title_valid?: 'filename has illegal characters (e.g., & | \\ / <tab>'
+    description: "provide a description with up to 255 legal characters"
+    valid_period: "Must be greater than or equal or zero"

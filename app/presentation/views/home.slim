@@ -1,24 +1,64 @@
-section.header
-  .logo
-    a href="/"  EtaShare
-  .links
-    - unless @current_account.logged_in?
+== assets(:js, defer: true)
+- if @current_account.logged_in?
+  .container
+    .side-bar
+      a href="/links"  EtaShare
+      a href='/account/#{@current_account.username}'  Account
+      a href='/auth/logout'  Logout
+      a href='/about' About
+    .main-area
+      == render :flash_bar
+      button.button-1 Add New Link
+      - if links.nil?
+        a.smaller Start by adding a new link
+      - unless links.nil?
+        h2.smaller Your Links
+        table
+          thead
+            tr
+              th Title
+              th Created At
+              th Valid Until
+              th Role
+          tbody 
+            - links.all.each do |link|
+              - date = Date.parse(link.created_at)
+              - valid_period = link.valid_period.to_i
+              / - binding.pry
+              tr.table-row.hoverable data-href="/links/#{link.id}"
+                td 
+                  | #{link.title}
+                td
+                  | #{date.strftime("%b %d, %Y")}
+                - if valid_period > 0
+                  td
+                    | #{(date + link.valid_period.to_i).strftime("%b %d, %Y")}
+                - else 
+                  td 
+                    | ∞
+                - if link.owner['attributes']['username'] == @current_account.username
+                  td 
+                    | Owner 
+                - else 
+                  td 
+                    - if link.one_time.to_i.nonzero?
+                      | One-time Accessor
+                    - else 
+                      | Accessor
+- unless @current_account.logged_in?
+  section.header
+    .logo
+      a href="/"  EtaShare
+    .links
       a href="/auth/register"  Register
-    - if @current_account.logged_in?
-      a href='/auth/logout' Logout
-      a href='/account/#{@current_account.username}' Account
-    a href="about.html"  About
-section.main
-  - if @current_account.logged_in?
-    .form
-      p.hero 
-        | You're signed in!🥳
-  - else
+      a href="/about"  About
+  section.main
     .text-bg
       p
         | Welcome to EtaShare! Where sharing your documents is safe and your data is securely encrypted and
         |  saved. Sign in to Start Sharing!
     .form
+      == render :flash_bar
       form.form-data method='post' action='/auth/login' id='form-login'
         img alt="" src="im.png" width="20%" /
         h1 Welcome to EtaShare
@@ -28,4 +68,3 @@ section.main
           input#email placeholder="Username" required="" type="text" name='username'/
           input#password minlength="8" placeholder="Password" required="" type="password" name='password'/
           button.button-1 Login
-

@@ -7,7 +7,8 @@ module EtaShare
   # Base class for Etashare Web Application
   class App < Roda
     plugin :render, engine: 'slim', views: 'app/presentation/views'
-    plugin :assets, css: 'style.css', path: 'app/presentation/assets'
+    plugin :assets, path: 'app/presentation/assets',
+                    css: 'style.css', js: 'index.js'
     plugin :public, root: 'app/presentation/public'
     plugin :multi_route
     plugin :flash
@@ -21,6 +22,7 @@ module EtaShare
       routing.multi_route
 
       # GET /
+      routing.redirect '/links' if @current_account.logged_in?
       routing.root do
         view 'home', locals: { current_account: @current_account }
       end

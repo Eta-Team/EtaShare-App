@@ -1,0 +1,18 @@
+#lol.modal
+  .modal-content
+    .modal-header
+      span.close &times;
+      h2 Edit Link
+    .modal-body
+      form role="form" action="/links/#{link.id}" method='post' id='edit-link-form'
+        input type="hidden" name="_method" value="put"
+        .form-group
+          label for='title_input' New Title:
+          input type='text' name='title' value="#{link.title}" id='title_input' class="form-control" placeholder="Enter new Title"
+          label for='description_input' New Description:
+          input type='text' name='description' id='description_input' class="form-control" value="#{link.description}" placeholder="Enter new Description"
+          label for='valid_period' New Validity Period:
+          input type='number' name='valid_period' id='valid_period' value="#{link.valid_period}" class="form-control" placeholder="Update Validity Period" min=0 max=3000
+          button.button-1.mt type='submit' value='submit' Update
+    / .modal-footer 
+    /   | djd

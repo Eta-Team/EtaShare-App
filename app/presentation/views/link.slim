@@ -1,0 +1,106 @@
+.container
+  .side-bar
+    a href="/links"  EtaShare
+    a href='/account/#{@current_account.username}'  Account
+    a href='/auth/logout'  Logout
+    a href='/about' About
+  .main-area
+    section.header
+      .logo
+       
+      .links
+        - if link.policies.can_add_files
+          a.myBtn  Add New File
+        - if link.policies.can_add_accessors 
+          a.myBtn  Add New Accessor
+        - if link.policies.can_edit
+          a.myBtn Edit Link 
+        - if link.policies.can_delete
+          form role="form" action="/links/#{link.id}/destroy" method='post' id='delete-link'
+            input.link-button  type='submit' value='Delete Link' 
+
+        / a href="/about"  About
+    == render :flash_bar
+    / - if link.policies.can_add_files
+    /   button.button-1.myBtn Add New File
+    - if link.nil? && link.policies.can_add_files
+        h3.smaller Add new files to your link
+    - if link.nil? && !link.policies.can_add_files 
+        h3.smaller
+          | This link does not contain any files yet.
+    - unless link.nil? 
+      h2.smaller Files
+      table
+        thead
+          tr
+            th Name
+            th Description
+            - if link.policies.can_add_files
+              th 
+        tbody 
+          - link.files.each do |file|
+            tr
+              td.table-row.hoverable.content data-href="/files/#{file.id}" 
+                | #{file.name}
+              td.content
+                | #{file.description}
+              - if link.policies.can_add_files
+                td.action.hoverable- 
+                  form role='form' method='post' action="/files/#{file.id}"
+                    input type='hidden' name='action' value='remove'
+                    input type='hidden' name='email' value="#{file.id}"
+                    button type="submit" class="btn-default" 
+                      span.material-symbols-outlined
+                       | delete 
+    - if link.owner.username == @current_account.username
+        / - if link.policies.can_add_accessors 
+        /   button.button-1.myBtn Add New Accessor
+        h2.smaller Accessors
+        - if link.accessors.empty?
+          p.smaller Add new Accessors to the link
+        - else
+          table
+            thead
+              tr
+                th Username
+                th Email
+                - if link.policies.can_remove_accessors
+                  th 
+            tbody 
+              - link.accessors.each do |accessor|
+                tr
+                  td.content
+                    | #{accessor.username}
+                  td.content
+                    | #{accessor.email}
+                  - if link.policies.can_remove_accessors
+                    td.hoverable-.action 
+                      form role="form" action="/links/#{link.id}/accessors" method='post' id='remove-accessor-form'
+                        input type='hidden' name='action' value='remove'
+                        input type='hidden' name='email' value="#{accessor.email}"
+                        
+                        button type="submit" class="btn-default"
+                          span.material-symbols-outlined
+                            | delete 
+    / - if link.policies.can_edit
+    /    button.button-1.myBtn Edit Link  
+    / - if link.policies.can_delete
+    /   form role="form" action="/links/#{link.id}/destroy" method='post' id='delete-link'
+    /     button.button-1.mt type='submit' value='submit' Delete
+
+include :new_file_modal
+include :new_accessor_modal
+include :edit_link_modal
+
+
+/ TEST
+/ button#myBtn Open Modal
+/! The Modal
+/ #myModal.modal
+/   /! Modal content
+/   .modal-content
+/     span.close &times;
+/     p Some text in the Modal..
+
+
+/ CHANGE THE LINKS AFTER

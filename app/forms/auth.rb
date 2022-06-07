@@ -14,7 +14,7 @@ module EtaShare
 
     # Registration information
     class Registration < Dry::Validation::Contract
-      config.messages.load_paths << File.join(__dir__, 'errors/account_details.yml')
+      config.messages.load_paths << Object::File.join(__dir__, 'errors/account_details.yml')
 
       params do
         required(:username).filled(format?: USERNAME_REGEX, min_size?: 4)
@@ -24,7 +24,7 @@ module EtaShare
 
     # Password info
     class Passwords < Dry::Validation::Contract
-      config.messages.load_paths << File.join(__dir__, 'errors/password.yml')
+      config.messages.load_paths << Object::File.join(__dir__, 'errors/password.yml')
 
       params do
         required(:password).filled

@@ -7,7 +7,7 @@ module EtaShare
   module Form
     USERNAME_REGEX = /^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$/
     EMAIL_REGEX = /@/
-    VALID_PERIOD = /[0-9]/
+    FILENAME_REGEX = %r{^((?![&/\\\{\}|\t]).)*$}
 
     def self.validation_errors(validation)
       validation.errors.to_h.map { |k, v| [k, v].join(' ') }.join('; ')

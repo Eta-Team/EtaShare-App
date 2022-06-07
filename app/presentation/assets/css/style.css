@@ -8,14 +8,25 @@ body {
   flex-direction: column;
 }
 
-.header a {
+.header a,
+.container a,
+.link-button {
   color: rgb(255, 106, 149);
   text-decoration: none;
   font-size: 18px;
 }
 
-.header a:hover {
+.link-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.header a:hover,
+.container a:hover,
+.link-button:hover {
   color: white;
+  cursor: pointer;
 }
 
 .header,
@@ -46,7 +57,8 @@ body {
 }
 
 .main {
-  flex: 1;
+  flex: 2;
+  overflow: scroll;
 }
 
 .text-bg,
@@ -188,4 +200,212 @@ body {
   width: fit-content;
   margin: 2%;
   padding: 4%;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+.side-bar {
+  background-color: #131427;
+  flex: 1;
+  display: flex;
+  gap: 18px;
+  padding: 18px;
+  /* align-items: center; */
+  flex-direction: column;
+}
+.side-bar a {
+  width: 100%;
+}
+
+.main-area {
+  flex: 7;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+}
+
+.main-area button {
+  margin: 12px;
+  align-self: end;
+}
+
+.main-area table {
+  align-self: center;
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+  table-layout: inherit;
+}
+
+table .action {
+  width: auto;
+  text-align: right;
+  white-space: nowrap;
+}
+table .content {
+  width: 48%;
+}
+
+.smaller {
+  width: 90%;
+  margin: 20px;
+}
+
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+/* tr:nth-child(even) {
+  background-color: #cccccc;
+} */
+
+.hoverable:hover {
+  cursor: pointer;
+  background-color: #dddddd;
+}
+
+.hoverable-:hover,
+.btn-default:hover {
+  cursor: pointer;
+  background-color: #f34e4e;
+  color: white;
+}
+
+/* sjkbkcjb */
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Header */
+.modal-header {
+  padding: 2px 12px;
+  background-color: #131427;
+  color: white;
+}
+
+/* Modal Body */
+.modal-body {
+  padding: 2px 12px;
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  width: 100%;
+}
+
+/* Modal Footer */
+.modal-footer {
+  padding: 2px 12px;
+  background-color: #131427;
+  color: white;
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: 8% auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 50%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+}
+
+/* Add Animation */
+@keyframes animatetop {
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+/* Modal Content/Box */
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.alert {
+  align-content: center;
+}
+
+.alert-success {
+  background-color: #a8dd8a;
+  color: white;
+  padding: 8px;
+}
+
+.alert-danger {
+  background-color: #bd3434;
+  color: white;
+  padding: 8px;
+}
+
+input[type="email"],
+input[type="text"],
+input[type="number"] {
+  width: 100%; /* Full width */
+  padding: 12px; /* Some padding */
+  border: 1px solid #ccc; /* Gray border */
+  border-radius: 4px; /* Rounded borders */
+  box-sizing: border-box; /* Make sure that padding and width stays in place */
+  margin-top: 6px; /* Add a top margin */
+  margin-bottom: 16px; /* Bottom margin */
+  resize: vertical; /* Allow the user to vertically resize the textarea (not horizontally) */
+}
+
+.form-group {
+  padding: 8px;
+}
+
+.mt {
+  margin: 4px 0px;
+}
+
+/* .btn-default {
+  margin: 0;
+  padding: 0;
+  border: none;
+} */
+.btn-default {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+  padding: 0px;
+  margin: 0 !important;
+  text-decoration: underline;
+  font-family: inherit;
+  font-size: inherit;
 }

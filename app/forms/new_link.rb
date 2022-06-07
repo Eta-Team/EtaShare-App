@@ -6,11 +6,11 @@ module EtaShare
   module Form
     # Each new link info
     class NewLink < Dry::Validation::Contract
-      config.messages.load_paths << File.join(__dir__, 'errors/new_link.yml')
+      config.messages.load_paths << Object::File.join(__dir__, 'errors/new_link.yml')
 
       params do
         required(:description).filled(:string)
-        required(:valid_period).filled(format?: VALID_PERIOD_REGEX)
+        # required(:valid_period).filled(format?: VALID_PERIOD_REGEX)
         required(:is_clicked).filled(:string)
       end
     end

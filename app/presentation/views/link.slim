@@ -82,25 +82,6 @@
                         button type="submit" class="btn-default"
                           span.material-symbols-outlined
                             | delete 
-    / - if link.policies.can_edit
-    /    button.button-1.myBtn Edit Link  
-    / - if link.policies.can_delete
-    /   form role="form" action="/links/#{link.id}/destroy" method='post' id='delete-link'
-    /     button.button-1.mt type='submit' value='submit' Delete
-
 include :new_file_modal
 include :new_accessor_modal
 include :edit_link_modal
-
-
-/ TEST
-/ button#myBtn Open Modal
-/! The Modal
-/ #myModal.modal
-/   /! Modal content
-/   .modal-content
-/     span.close &times;
-/     p Some text in the Modal..
-
-
-/ CHANGE THE LINKS AFTER

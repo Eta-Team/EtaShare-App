@@ -5,6 +5,19 @@
       span.close &times;
       h2 Add New File
     .modal-body
-      | LOLKD 
-    .modal-footer 
-      | djd
+      form role="form" action="/links/#{link.id}/files" method='post' id='upload-file-form' enctype="multipart/form-data"
+        input type="hidden" name="_method" value="put"
+        .form-group
+          label for='description_input' Description:
+          input type='text' name='description' id='description_input' placeholder="Enter File Description" required=""
+          label for='content' File Upload:
+          input{
+            type="file"
+              id='content' 
+              accept="application/pdf"
+              name="file" 
+              required
+          }
+          button.button-1.mt type='submit' value='submit' Add
+        
+    

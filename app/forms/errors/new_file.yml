@@ -1,0 +1,3 @@
+en:
+  errors:
+    description: "provide a description with up to 160 legal characters"

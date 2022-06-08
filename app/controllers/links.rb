@@ -118,6 +118,7 @@ module EtaShare
           # POST /links/[link_id]/files/
           routing.post('files') do
             file_data = Form::NewFile.new.call(routing.params)
+
             if file_data.failure?
               flash[:error] = Form.message_values(file_data)
               routing.halt

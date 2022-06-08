@@ -11,7 +11,7 @@ module EtaShare
 
     def initialize(info)
       process_attributes(info['attributes'])
-      process_included(info['include'])
+      process_included(info['included'])
     end
 
     private

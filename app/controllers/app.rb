@@ -2,6 +2,7 @@
 
 require 'roda'
 require 'slim'
+require 'slim/include'
 
 module EtaShare
   # Base class for Etashare Web Application

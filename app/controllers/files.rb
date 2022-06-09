@@ -6,6 +6,7 @@ module EtaShare
   # Web controller for EtaShare API
   class App < Roda
     route('files') do |routing|
+      routing.public
       routing.redirect '/' unless @current_account.logged_in?
 
       # GET /files/[file_id]

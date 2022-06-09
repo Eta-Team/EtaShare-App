@@ -60,6 +60,7 @@ module EtaShare
 
       @register_route = '/auth/register'
       routing.on 'register' do
+        routing.public
         routing.is do
           # GET /auth/register
           routing.get do
@@ -68,8 +69,12 @@ module EtaShare
 
           # POST /auth/register
           routing.post do
-            account_data = JsonRequestBody.symbolize(routing.params)
-            VerifyRegistration.new(App.config).call(account_data)
+            registration = Form::Registration.new.call(routing.params)
+            if registration.failure?
+              flash[:error] = Form.validation_errors(registration)
+              routing.redirect @register_route
+            end
+            VerifyRegistration.new(App.config).call(registration)
 
             flash[:notice] = 'Please check your email for a verification link'
             routing.redirect '/'

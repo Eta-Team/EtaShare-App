@@ -17,9 +17,6 @@ module EtaShare
       registration_token = SecureMessage.encrypt(registration_data)
       registration_data['verification_url'] =
         "#{@config.APP_URL}/auth/register/#{registration_token}"
-      require 'pry'
-
-      binding.pry
 
       response = HTTP.post("#{@config.API_URL}/auth/register",
                            json: registration_data)

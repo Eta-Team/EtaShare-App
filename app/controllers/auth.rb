@@ -106,14 +106,14 @@ module EtaShare
 
             flash[:notice] = 'Please check your email for a verification link'
             routing.redirect '/'
-          rescue VerifyRegistration::ApiServerError => e
-            App.logger.warn "API server error: #{e.inspect}\n#{e.backtrace}"
-            flash[:error] = 'Our servers are not responding -- please try later'
-            routing.redirect @register_route
-          rescue StandardError => e
-            App.logger.error "Could not verify registration: #{e.inspect}"
-            flash[:error] = 'Registration details are not valid'
-            routing.redirect @register_route
+            # rescue VerifyRegistration::ApiServerError => e
+            #   App.logger.warn "API server error: #{e.inspect}\n#{e.backtrace}"
+            #   flash[:error] = 'Our servers are not responding -- please try later'
+            #   routing.redirect @register_route
+            # rescue StandardError => e
+            #   App.logger.error "Could not verify registration: #{e.inspect}"
+            #   flash[:error] = 'Registration details are not valid'
+            #   routing.redirect @register_route
           end
         end
 

@@ -9,9 +9,9 @@
     .main-area
       == render :flash_bar
       button.button-1 Add New Link
-      - if links.nil?
-        a.smaller Start by adding a new link
-      - unless links.nil?
+      - unless links.all.any?
+        h2.smaller Start by adding a new link
+      - if links.all.any?
         h2.smaller Your Links
         table
           thead

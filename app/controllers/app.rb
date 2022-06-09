@@ -25,7 +25,13 @@ module EtaShare
       # GET /
       routing.redirect '/links' if @current_account.logged_in?
       routing.root do
-        view 'home', locals: { current_account: @current_account }
+        url = App.config.GOOGLE_OAUTH_URL
+        oauth_params = ["client_id=#{App.config.GOOGLE_CLIENT_ID}",
+                        "redirect_uri=#{App.config.REDIRECT_URI}",
+                        "scope=#{App.config.SCOPE}",
+                        'response_type=code'].join('&')
+        link = "#{url}?#{oauth_params}"
+        view 'home', locals: { current_account: @current_account, g_url: link }
       end
     end
   end

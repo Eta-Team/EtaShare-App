@@ -114,7 +114,6 @@ module EtaShare
             end
           end
 
-          # MEN KI KOTE OU RIVE BOSSSS
           # POST /links/[link_id]/files/
           routing.post('files') do
             file_data = Form::NewFile.new.call(routing.params)
@@ -145,9 +144,6 @@ module EtaShare
           link_list = GetAllLinks.new(App.config).call(@current_account)
           links = Links.new(link_list)
 
-          # view :links_all, locals: {
-          #   current_account: @current_account, links:
-          # }
           view :home, locals: {
             current_account: @current_account, links:
           }

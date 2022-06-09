@@ -8,6 +8,7 @@ module EtaShare
   class App < Roda
     route('auth') do |routing|
       routing.public
+      @oauth_callback = '/auth/oauth2callback'
       @login_route = '/'
       routing.is 'login' do
         # GET /auth/login
@@ -18,7 +19,6 @@ module EtaShare
         # POST /auth/login
         routing.post do
           credentials = Form::LoginCredentials.new.call(routing.params)
-
           if credentials.failure?
             flash[:error] = 'Please enter both username and password'
             routing.redirect @login_route
@@ -35,7 +35,9 @@ module EtaShare
           CurrentSession.new(session).current_account = current_account
 
           flash[:notice] = "Welcome back #{current_account.username}!"
+          # routing.redirect '/'
           routing.redirect '/links'
+
         rescue AuthenticateAccount::UnauthorizedError
           flash.now[:error] = 'Username and password did not match our records'
           response.status = 401
@@ -43,6 +45,33 @@ module EtaShare
         rescue AuthenticateAccount::ApiServerError => e
           App.logger.warn "API server error: #{e.inspect}\n#{e.backtrace}"
           flash[:error] = 'Our servers are not responding -- please try later'
+          response.status = 500
+          routing.redirect @login_route
+        end
+      end
+
+      routing.is 'oauth2callback' do
+        # GET /auth/sso_callback
+        routing.get do
+          authorized = AuthorizeGoogleAccount
+                       .new(App.config)
+                       .call(routing.params['code'])
+
+          current_account = Account.new(
+            authorized[:account],
+            authorized[:auth_token]
+          )
+          CurrentSession.new(session).current_account = current_account
+
+          flash[:notice] = "Welcome #{current_account.username}!"
+          routing.redirect '/links'
+        rescue AuthorizeGoogleAccount::UnauthorizedError
+          flash[:error] = 'Could not login with Google'
+          response.status = 403
+          routing.redirect @login_route
+        rescue StandardError => e
+          puts "SSO LOGIN ERROR: #{e.inspect}\n#{e.backtrace}"
+          flash[:error] = 'Unexpected API Error'
           response.status = 500
           routing.redirect @login_route
         end
@@ -60,7 +89,6 @@ module EtaShare
 
       @register_route = '/auth/register'
       routing.on 'register' do
-        routing.public
         routing.is do
           # GET /auth/register
           routing.get do

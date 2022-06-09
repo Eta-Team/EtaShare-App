@@ -98,6 +98,7 @@ module EtaShare
           # POST /auth/register
           routing.post do
             registration = Form::Registration.new.call(routing.params)
+            require 'pry'
             binding.pry
             if registration.failure?
               flash[:error] = Form.validation_errors(registration)

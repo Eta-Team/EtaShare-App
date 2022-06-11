@@ -41,14 +41,13 @@
           - link.files.each do |file|
             tr
               td.table-row.hoverable.content data-href="/files/#{file.id}" 
+
                 | #{file.name}
               td.content
                 | #{file.description}
               - if link.policies.can_add_files
                 td.action.hoverable- 
-                  form role='form' method='post' action="/files/#{file.id}"
-                    input type='hidden' name='action' value='remove'
-                    input type='hidden' name='email' value="#{file.id}"
+                  form role='form' method='post' action="/files/#{file.id}/destroy"
                     button type="submit" class="btn-default" 
                       span.material-symbols-outlined
                        | delete 

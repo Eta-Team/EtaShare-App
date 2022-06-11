@@ -26,7 +26,7 @@ module EtaShare
 
           rescue StandardError => e
             puts "#{e.inspect}\n#{e.backtrace}"
-            flash[:error] = 'Link not longer available'
+            flash[:error] = 'Link no longer available'
             routing.redirect @links_route
           end
 

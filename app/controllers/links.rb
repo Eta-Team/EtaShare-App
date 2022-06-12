@@ -115,27 +115,48 @@ module EtaShare
           end
 
           # POST /links/[link_id]/files/
-          routing.post('files') do
-            file_data = Form::NewFile.new.call(routing.params)
+          routing.on('files') do
+            routing.is do
+              routing.post do
+                file_data = Form::NewFile.new.call(routing.params)
 
-            if file_data.failure?
-              flash[:error] = Form.message_values(file_data)
-              routing.halt
+                if file_data.failure?
+                  flash[:error] = Form.message_values(file_data)
+                  routing.halt
+                end
+
+                CreateNewFile.new(App.config).call(
+                  current_account: @current_account,
+                  link_id:,
+                  file_data: file_data.to_h
+                )
+
+                flash[:notice] = 'Your file was added'
+              rescue StandardError => e
+                puts e.inspect
+                puts e.backtrace
+                flash[:error] = 'Could not add file'
+              ensure
+                routing.redirect @link_route
+              end
             end
 
-            CreateNewFile.new(App.config).call(
-              current_account: @current_account,
-              link_id:,
-              file_data: file_data.to_h
-            )
+            routing.on(String) do |file_id|
+              DeleteFile.new(App.config).call(
+                current_account: @current_account,
+                link_id:,
+                file_id:
+              )
 
-            flash[:notice] = 'Your file was added'
-          rescue StandardError => e
-            puts e.inspect
-            puts e.backtrace
-            flash[:error] = 'Could not add file'
-          ensure
-            routing.redirect @link_route
+              flash[:notice] = 'Your file was deleted'
+              routing.redirect @link_route
+            rescue StandardError => e
+              puts e.inspect
+              puts e.backtrace
+              flash[:error] = 'Could not delete file'
+            ensure
+              routing.redirect @link_route
+            end
           end
         end
 

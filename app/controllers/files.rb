@@ -11,13 +11,15 @@ module EtaShare
 
       # GET /files/[file_id]
       routing.get(String) do |file_id|
-        file_info = GetFile.new(App.config)
-                           .call(@current_account, file_id)
-        file = File.new(file_info)
+        routing.is do
+          file_info = GetFile.new(App.config)
+                             .call(@current_account, file_id)
+          file = File.new(file_info)
 
-        view :file, locals: {
-          current_account: @current_account, file:
-        }
+          view :file, locals: {
+            current_account: @current_account, file:
+          }
+        end
       end
     end
   end

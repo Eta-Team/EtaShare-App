@@ -17,6 +17,12 @@ module EtaShare
     route do |routing|
       response['Content-Type'] = 'text/html; charset=utf-8'
       @current_account = CurrentSession.new(session).current_account
+      url = App.config.GOOGLE_OAUTH_URL
+      oauth_params = ["client_id=#{App.config.GOOGLE_CLIENT_ID}",
+                      "redirect_uri=#{App.config.REDIRECT_URI}",
+                      "scope=#{App.config.SCOPE}",
+                      'response_type=code'].join('&')
+      @link = "#{url}?#{oauth_params}"
 
       routing.public
       routing.assets
@@ -25,13 +31,7 @@ module EtaShare
       # GET /
       routing.redirect '/links' if @current_account.logged_in?
       routing.root do
-        url = App.config.GOOGLE_OAUTH_URL
-        oauth_params = ["client_id=#{App.config.GOOGLE_CLIENT_ID}",
-                        "redirect_uri=#{App.config.REDIRECT_URI}",
-                        "scope=#{App.config.SCOPE}",
-                        'response_type=code'].join('&')
-        link = "#{url}?#{oauth_params}"
-        view 'home', locals: { current_account: @current_account, g_url: link }
+        view 'home', locals: { current_account: @current_account, g_url: @link }
       end
     end
   end

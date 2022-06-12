@@ -23,32 +23,31 @@
     == render :flash_bar
     / - if link.policies.can_add_files
     /   button.button-1.myBtn Add New File
-    - if link.nil? && link.policies.can_add_files
+    - if link.files.count.zero? && link.policies.can_add_files
         h3.smaller Add new files to your link
-    - if link.nil? && !link.policies.can_add_files 
+    - if link.files.count.zero? && !link.policies.can_add_files 
         h3.smaller
           | This link does not contain any files yet.
-    - unless link.nil? 
+    - unless link.files.count.zero? 
       h2.smaller Files
       table
         thead
           tr
             th Name
             th Description
-            - if link.policies.can_add_files
+            - if link.policies.can_delete_files
               th 
         tbody 
           - link.files.each do |file|
             tr
               td.table-row.hoverable.content data-href="/files/#{file.id}" 
+
                 | #{file.name}
               td.content
                 | #{file.description}
-              - if link.policies.can_add_files
+              - if link.policies.can_delete_files
                 td.action.hoverable- 
-                  form role='form' method='post' action="/files/#{file.id}"
-                    input type='hidden' name='action' value='remove'
-                    input type='hidden' name='email' value="#{file.id}"
+                  form role='form' method='post' action="/links/#{link.id}/files/#{file.id}"
                     button type="submit" class="btn-default" 
                       span.material-symbols-outlined
                        | delete 

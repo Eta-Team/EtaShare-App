@@ -1,6 +1,13 @@
-/ - file = Base64.strict_decode64(file.content)
-/ form role="form" action="" method='post' id='upload-file-form' enctype="Content-Type: application/pdf"
-/   button 
+/ - f = Base64.strict_decode64(file.content).force_encoding("UTF-8")
+.container
+    .side-bar
+      a href="/links"  EtaShare
+      a href='/account/#{@current_account.username}'  Account
+      a href='/auth/logout'  Logout
+      a href='/about' About
+    .main-area
+      object
+        embed#pdfID src="data:application/pdf;base64,#{file.content}" type="text/html"/
+    
 
 
-  

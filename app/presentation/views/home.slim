@@ -1,4 +1,3 @@
-- binding.pry 
 == assets(:js, defer: true)
 - if @current_account.logged_in?
   .container
@@ -69,5 +68,5 @@
           input#email placeholder="Username" required="" type="text" name='username'/
           input#password minlength="8" placeholder="Password" required="" type="password" name='password'/
           button.button-1 Login
-          a class="btn-block btn-social btn-lg btn-github" href=g_url
+          a class="btn-block btn-social btn-lg btn-github" href="#{g_url}"
             | Sign In with Google

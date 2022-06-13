@@ -185,7 +185,7 @@ module EtaShare
             link_data: link_data.to_h
           )
 
-          flash[:notice] = 'Add links and accessor to your new link'
+          flash[:notice] = 'Link successfully created'
         rescue StandardError => e
           puts "FAILURE Creating Link: #{e.inspect}"
           flash[:error] = 'Could not create link'

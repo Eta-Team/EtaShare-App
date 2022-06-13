@@ -1,4 +1,4 @@
 en:
   errors:
-    description: 'Link must have a description'
-    valid_period: 'Validity period must be a number'
+    title: "Title should consist of 100 characters"
+    description: "Description should consist of 255 characters"

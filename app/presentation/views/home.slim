@@ -1,14 +1,14 @@
-== assets(:js, defer: true)
+== assets([:js, :home], defer: true)
 - if @current_account.logged_in?
   .container
     .side-bar
       a href="/links"  EtaShare
-      a href='/account/#{@current_account.username}'  Account
+      a href='/account/#{Base64.strict_encode64(@current_account.username)}'  Account
       a href='/auth/logout'  Logout
       a href='/about' About
     .main-area
       == render :flash_bar
-      button.button-1 Add New Link
+      button.button-1#myBtn0 Add New Link
       - unless links.all.any?
         h2.smaller Start by adding a new link
       - if links.all.any?
@@ -70,3 +70,5 @@
           button.button-1 Login
           a class="btn-block btn-social btn-lg btn-github" href="#{g_url}"
             | Sign In with Google
+
+include :new_link_modal

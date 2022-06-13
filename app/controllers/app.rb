@@ -9,7 +9,7 @@ module EtaShare
   class App < Roda
     plugin :render, engine: 'slim', views: 'app/presentation/views'
     plugin :assets, path: 'app/presentation/assets',
-                    css: 'style.css', js: 'index.js'
+                    css: 'style.css', js: { main: 'index.js', home: 'home.js' }
     plugin :public, root: 'app/presentation/public'
     plugin :multi_route
     plugin :flash

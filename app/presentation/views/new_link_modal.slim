@@ -1,0 +1,22 @@
+== assets(:css)
+#modal0.modal
+  /! Modal content
+  .modal-content
+    .modal-header
+      span#close0 &times;
+      h2 Add New Link
+    .modal-body
+      form role="form" action="/links" method='post' id='new-link-form'
+        .form-group
+          label for='title_input' Title:
+          input type='text' name='title' id='title_input' placeholder="Enter new Title"
+          label for='description_input' Description:
+          input type='text' name='description' id='description_input' placeholder="Enter new Description"
+          label for='valid_period' Validity Period in Days (0 = Always Available):
+          input type='number' name='valid_period' id='valid_period' placeholder="Validity Period of Link" min=0 max=3000
+          label for='one_time' One_time Access To Accessor:
+          input type='number' name='one_time' id='one_time' placeholder="Zero = false, One = True" min=0 max=1
+          button.button-1.mt type='submit' value='submit' Create
+/ - binding.pry
+    / .modal-footer 
+    /   | djd

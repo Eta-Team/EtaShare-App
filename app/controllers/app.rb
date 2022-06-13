@@ -29,7 +29,7 @@ module EtaShare
       routing.multi_route
 
       # GET /
-      # routing.redirect '/links' if @current_account.logged_in?
+      routing.redirect '/links' if @current_account.logged_in?
       routing.root do
         view 'home', locals: { current_account: @current_account, g_url: @link }
       end

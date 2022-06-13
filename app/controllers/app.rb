@@ -17,6 +17,7 @@ module EtaShare
     route do |routing|
       response['Content-Type'] = 'text/html; charset=utf-8'
       @current_account = CurrentSession.new(session).current_account
+      CurrentSession.new(session).delete
       url = App.config.GOOGLE_OAUTH_URL
       oauth_params = ["client_id=#{App.config.GOOGLE_CLIENT_ID}",
                       "redirect_uri=#{App.config.REDIRECT_URI}",

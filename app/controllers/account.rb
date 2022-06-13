@@ -4,7 +4,7 @@ require 'roda'
 require_relative './app'
 
 module EtaShare
-  # Web controller for Credence API
+  # Web controller for EtaShare API
   class App < Roda
     route('account') do |routing|
       routing.on do

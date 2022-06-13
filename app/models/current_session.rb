@@ -19,7 +19,7 @@ module EtaShare
       @secure_session.set(:auth_token, current_account.auth_token)
     end
 
-    def self.delete
+    def delete
       @secure_session.delete(:account)
       @secure_session.delete(:auth_token)
     end

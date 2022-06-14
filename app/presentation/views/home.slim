@@ -5,7 +5,6 @@
       a href="/links"  EtaShare
       a href='/account/#{Base64.strict_encode64(@current_account.username)}'  Account
       a href='/auth/logout'  Logout
-      a href='/about' About
     .main-area
       == render :flash_bar
       button.button-1#myBtn0 Add New Link

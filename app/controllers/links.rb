@@ -80,6 +80,24 @@ module EtaShare
             routing.redirect @links_route
           end
 
+          routing.on('forfeit') do
+            routing.is do
+              # binding.pry
+              ForfeitAccess.new(App.config).call(
+                current_account: @current_account,
+                link_id:
+              )
+              flash[:notice] = 'Successfully forfeited access to link'
+              routing.redirect @links_route
+            rescue StandardError => e
+              puts e.inspect
+              puts e.backtrace
+              flash[:error] = 'Could not forfeit access'
+            ensure
+              routing.redirect @links_route
+            end
+          end
+
           routing.on('accessors') do
             # POST api/v1/links/[link_id]/accessors
             routing.post do

@@ -19,6 +19,10 @@
         - if link.policies.can_delete
           form role="form" action="/links/#{link.id}/destroy" method='post' id='delete-link'
             input.link-button  type='submit' value='Delete Link' 
+        - if link.policies.can_leave
+          form role="form" action="/links/#{link.id}/forfeit" method='post' id='forfeit-access'
+            input type='hidden' name='action' value='remove'
+            input.link-button  type='submit' value='Forfeit Access' 
 
         / a href="/about"  About
     == render :flash_bar

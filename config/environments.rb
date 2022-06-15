@@ -30,7 +30,9 @@ module EtaShare
     ONE_MONTH = 30 * 24 * 60 * 60
 
     configure do
+      SecureSession.setup(ENV.fetch('REDIS_TLS_URL', nil)) # REDIS_TLS_URL used again below
       SecureMessage.setup(ENV.delete('MSG_KEY'))
+      SignedMessage.setup(config)
     end
 
     configure :production do
@@ -40,6 +42,8 @@ module EtaShare
 
       use Rack::Session::Redis,
           expire_after: ONE_MONTH,
+          httponly: true,
+          same_site: :strict,
           redis_server: {
             url: ENV.delete('REDIS_TLS_URL'),
             ssl_params: { verify_mode: OpenSSL::SSL::VERIFY_NONE }
@@ -55,7 +59,9 @@ module EtaShare
       #     expire_after: ONE_MONTH, secret: config.SESSION_SECRET
 
       use Rack::Session::Pool,
-          expire_after: ONE_MONTH
+          expire_after: ONE_MONTH,
+          httponly: true,
+          same_site: :strict
     end
 
     # Allows running reload! in pry to restart entire app

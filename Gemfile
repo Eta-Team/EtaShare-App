@@ -20,6 +20,7 @@ gem 'redis-rack'
 # Security
 gem 'rack-ssl-enforcer'
 gem 'rbnacl' # assumes libsodium package already installed
+gem 'secure_headers'
 
 # Debugging
 gem 'pry'

@@ -414,6 +414,11 @@ input[type="file"] {
   font-size: inherit;
 }
 
+object {
+  height: 0;
+}
+
+iframe,
 embed {
   background: #000;
   border: none; /* Reset default border */

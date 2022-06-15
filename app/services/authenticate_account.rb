@@ -9,13 +9,11 @@ module EtaShare
 
     class ApiServerError < StandardError; end
 
-    def initialize(config)
-      @config = config
-    end
-
     def call(username:, password:)
-      response = HTTP.post("#{@config.API_URL}/auth/authenticate",
-                           json: { username:, password: })
+      credentials = { username:, password: }
+
+      response = HTTP.post("#{ENV.fetch('API_URL', nil)}/auth/authenticate",
+                           json: SignedMessage.sign(credentials))
 
       raise(NotAuthenticatedError) if response.code == 401
       raise(ApiServerError) if response.code != 200

@@ -38,9 +38,12 @@ module EtaShare
     end
 
     def get_sso_account_from_api(id_token)
+      signed_sso_info = { id_token: }
+                        .then { |sso_info| SignedMessage.sign(sso_info) }
+
       response =
         HTTP.post("#{@config.API_URL}/auth/sso",
-                  json: { id_token: })
+                  json: signed_sso_info)
       raise if response.code >= 400
 
       account_info = JSON.parse(response)['data']['attributes']

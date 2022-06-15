@@ -11,6 +11,7 @@ desc 'Run application console (pry)'
 task console: :print_env do
   sh 'pry -r ./spec/test_load_all'
 end
+
 desc 'Test all the specs'
 Rake::TestTask.new(:spec) do |t|
   t.pattern = 'spec/**/*_spec.rb'
@@ -58,6 +59,16 @@ namespace :generate do
   desc 'Create cookie secret'
   task session_secret: :load_lib do
     puts "New SESSION_SECRET (base64): #{SecureSession.generate_secret}"
+  end
+end
+
+namespace :url do
+  # usage: $ rake url:integrity URL=http://example.org/script.js
+  desc 'Generate integrity hash for a URL'
+  task :integrity do
+    sha384 = `curl -L -s #{ENV.fetch('URL', nil)} | openssl dgst -sha384 -binary | \
+              openssl enc -base64`
+    puts "sha384-#{sha384}"
   end
 end
 

@@ -1,4 +1,5 @@
 / - f = Base64.strict_decode64(file.content).force_encoding("UTF-8")
+== assets(:css)
 .container
     .side-bar
       a href="/links"  EtaShare
@@ -6,7 +7,7 @@
       a href='/auth/logout'  Logout
     .main-area
       object
-        embed#pdfID src="data:application/pdf;base64,#{file.content}" type="text/html"/
+      iframe#pdfID src="data:application/pdf;base64,#{file.content}" type="text/html"/
     
 
 

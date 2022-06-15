@@ -11,9 +11,9 @@ module EtaShare
     plugin :environments
     plugin :multi_route
 
-    FONT_SRC = %w[https://cdn.jsdelivr.net].freeze
-    SCRIPT_SRC = %w[https://cdn.jsdelivr.net].freeze
-    STYLE_SRC = %w[https://bootswatch.com https://cdn.jsdelivr.net].freeze
+    FONT_SRC = %w[https://cdn.jsdelivr.net https://fonts.googleapis.com https://fonts.gstatic.com].freeze
+    SCRIPT_SRC = %w[https://cdn.jsdelivr.net https://code.jquery.com].freeze
+    STYLE_SRC = %w[https://cdn.jsdelivr.net https://fonts.googleapis.com https://fonts.gstatic.com].freeze
 
     configure :production do
       use Rack::SslEnforcer, hsts: true
@@ -38,19 +38,20 @@ module EtaShare
       config.x_permitted_cross_domain_policies = 'none'
       config.referrer_policy = 'origin-when-cross-origin'
 
-      # note: single-quotes needed around 'self' and 'none' in CSPs
+      # NOTE: single-quotes needed around 'self' and 'none' in CSPs
       # rubocop:disable Lint/PercentStringArray
       config.csp = {
         report_only: false,
         preserve_schemes: true,
         default_src: %w['self'],
-        child_src: %w['self'],
+        # child_src: %w['self' 'data:application/pdf'],
+        frame_src: %w['self' data:],
         connect_src: %w[wws:],
         img_src: %w['self'],
         font_src: %w['self'] + FONT_SRC,
         script_src: %w['self'] + SCRIPT_SRC,
-        style_src: %W['self'] + STYLE_SRC,
-        form_action: %w['self'],
+        style_src: %W['self' 'unsafe-inline'] + STYLE_SRC,
+        form_action: %w['self' /auth/oauth2callback?],
         frame_ancestors: %w['none'],
         object_src: %w['none'],
         block_all_mixed_content: true,

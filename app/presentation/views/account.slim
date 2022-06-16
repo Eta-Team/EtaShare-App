@@ -1,3 +1,4 @@
+== assets([:js, :home], defer: true)
 section.header
   .logo
     a href="/"  EtaShare
@@ -6,16 +7,27 @@ section.header
         a href='/auth/logout' Logout
 section.main.account_info
   div.main_content
-    h1 
-      | Account Details
-    b 
-      | Username: 
-    == current_account.username
-    br
-    b 
-      | Email: 
-    == current_account.email
-    br 
-    b
-      | API Key:
-    == current_account.auth_token
+    .form
+      h1 
+        | Account Details
+      - picture = @current_account.account_info['attributes']['picture']
+      - unless picture.nil?
+        img.prof_pic src="#{picture}" alt=""/
+        br/
+        br/
+      b 
+        | Username: 
+      == current_account.username
+      br 
+      br
+      b 
+        | Email: 
+      == current_account.email
+      br/
+      br/
+      button.button-1.myBtn Show API Key
+      / b
+      /   | API Key:
+      / == current_account.auth_token
+include :show_api_modal
+

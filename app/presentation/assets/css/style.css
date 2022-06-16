@@ -425,3 +425,18 @@ embed {
   height: 100vh; /* Viewport-relative units */
   width: 100%;
 }
+
+.prof_pic {
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+}
+
+.test {
+  white-space: normal;
+  word-break: break-word;
+}
+
+.test:hover {
+  font-size: 700;
+}

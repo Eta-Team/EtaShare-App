@@ -5,13 +5,14 @@ $(document).ready(function ($) {
 });
 
 // HOME :
-const modal0 = document.getElementById("modal0");
-const btn0 = document.getElementById("myBtn0");
-const span0 = document.getElementById("close0");
+const modal = document.getElementsByClassName("modal");
+const btn = document.getElementsByClassName("myBtn");
+const span = document.getElementsByClassName("close");
 
-btn0.onclick = function () {
-  modal0.style.display = "block";
+btn[0].onclick = function () {
+  modal[0].style.display = "block";
 };
-span0.onclick = function () {
-  modal0.style.display = "none";
+
+span[0].onclick = function () {
+  modal[0].style.display = "none";
 };

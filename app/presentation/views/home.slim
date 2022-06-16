@@ -7,7 +7,8 @@
       a href='/auth/logout'  Logout
     .main-area
       == render :flash_bar
-      button.button-1#myBtn0 Add New Link
+      / button.button-1#myBtn0 Add New Link
+      button.button-1.myBtn Add New Link
       - unless links.all.any?
         h2.smaller Start by adding a new link
       - if links.all.any?

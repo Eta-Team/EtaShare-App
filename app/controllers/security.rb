@@ -14,6 +14,7 @@ module EtaShare
     FONT_SRC = %w[https://cdn.jsdelivr.net https://fonts.googleapis.com https://fonts.gstatic.com].freeze
     SCRIPT_SRC = %w[https://cdn.jsdelivr.net https://code.jquery.com].freeze
     STYLE_SRC = %w[https://cdn.jsdelivr.net https://fonts.googleapis.com https://fonts.gstatic.com].freeze
+    IMG_SRC = %w[https://lh3.googleusercontent.com]
 
     configure :production do
       use Rack::SslEnforcer, hsts: true
@@ -47,7 +48,7 @@ module EtaShare
         # child_src: %w['self' 'data:application/pdf'],
         frame_src: %w['self' data:],
         connect_src: %w[wws:],
-        img_src: %w['self'],
+        img_src: %w['self'] + IMG_SRC,
         font_src: %w['self'] + FONT_SRC,
         script_src: %w['self'] + SCRIPT_SRC,
         style_src: %W['self' 'unsafe-inline'] + STYLE_SRC,

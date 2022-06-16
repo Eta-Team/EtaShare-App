@@ -1,0 +1,12 @@
+
+== assets(:css)
+.modal
+  /! Modal content
+  .modal-content
+    .modal-header
+      span.close &times;
+      h2 API KEY
+    .modal-body 
+      .form-group
+        p.test 
+          | #{current_account.auth_token}
